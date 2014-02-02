@@ -14,6 +14,6 @@ public class AsyncResourceGetTest {
 
     @Test
     public void testConfig() {
-        asyncResource.getIt();
+//        asyncResource.getChunks();
     }
 }
