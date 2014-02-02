@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user -->
+<!-- -->
+<!-- For professional support please see -->
+<!-- http://www.qos.ch/shop/products/professionalSupport -->
+<!-- -->
+<configuration scan="true">
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <pattern>%date %level %logger:%line %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="debugFile" class="ch.qos.logback.core.FileAppender">
+        <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
+        <append>false</append>
+        <file>debug.log</file>
+        <encoder>
+            <pattern>%date %level %logger:%line %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="au.org.qldjvm" level="DEBUG" />
+
+    <root level="WARN">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="debugFile" />
+    </root>
+
+</configuration>
