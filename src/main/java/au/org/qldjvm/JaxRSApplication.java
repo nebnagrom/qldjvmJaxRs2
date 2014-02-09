@@ -11,6 +11,9 @@ public class JaxRSApplication extends ResourceConfig {
     public JaxRSApplication() {
         LOG.debug("initialising my jax rs app");
         register(AsyncResource.class);
+        register(DelayedAsyncResource.class);
         register(MyResource.class);
+        register(PoweredByResponseFilter.class);
+        register(MyResourceClient.class);
     }
 }

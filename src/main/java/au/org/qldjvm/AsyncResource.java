@@ -59,7 +59,7 @@ public class AsyncResource {
     @Path("/data")
     public String getChunks() {
 
-        LOG.debug("triggering chunked sendingS");
+        LOG.debug("triggering chunked sending");
         Client client = ClientBuilder.newClient();
         final Response response = client.target("http://localhost:8091/jaxrs2/rest/async").request().get();
         final ChunkedInput<String> chunkedInput = response.readEntity(new GenericType<ChunkedInput<String>>() {
