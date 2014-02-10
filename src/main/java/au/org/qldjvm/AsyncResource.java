@@ -44,14 +44,10 @@ public class AsyncResource {
                     } catch (IOException e) {
                         LOG.error("failed to close output in finally not sure what happens now!");
                     }
-                    // simplified: IOException thrown from
-                    // this close() should be handled here...
                 }
             }
         }.start();
 
-        // the output will be probably returned even before
-        // a first chunk is written by the new thread
         return output;
     }
 
