@@ -12,6 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 @Path("myresource")
@@ -28,6 +31,13 @@ public class MyResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String getItSubpath(@PathParam("pathParam") String pathParam, @QueryParam("queryParam") String queryParam) {
         return "Subpath Got it! with path param " + pathParam + " query param " + queryParam;
+    }
+    
+    @GET
+    @Path("badRequest")
+    public Response badGet() {
+        ResponseBuilder responseBuilder = Response.status(Status.BAD_REQUEST.getStatusCode());
+        return responseBuilder.entity("Bad Request").build();
     }
 
     @DELETE
