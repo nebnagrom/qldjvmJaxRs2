@@ -123,12 +123,14 @@
                     <useTestScope>true</useTestScope>
                     <stopPort>8005</stopPort>
                     <stopKey>STOP</stopKey>
-                    <daemon>true</daemon>
                 </configuration>
                 <executions>
                     <execution>
                         <id>start-jetty</id>
                         <phase>pre-integration-test</phase>
+                        <configuration>
+                            <daemon>true</daemon>
+                        </configuration>
                         <goals>
                             <goal>stop</goal>
                             <goal>start</goal>

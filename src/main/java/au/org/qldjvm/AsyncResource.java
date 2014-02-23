@@ -70,10 +70,4 @@ public class AsyncResource {
 
         return chunkResult.toString();
     }
-
-    @POST
-    public void startAsync() {
-
-        LOG.debug("chunked posting received");
-    }
 }

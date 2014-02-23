@@ -17,6 +17,7 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,9 @@ public class MyResourceClient {
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
         Client client = ClientBuilder.newClient();
+        client.register(LoggingFilter.class);
         WebTarget target = client.target(targetLocation);
+        target.register(LoggingFilter.class);
         Builder requestBuilder = target.request();
         Response response = requestBuilder.accept(MediaType.TEXT_PLAIN).header("someHeader", "someValue").get();
 
