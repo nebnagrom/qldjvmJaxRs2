@@ -3,7 +3,6 @@ package au.org.qldjvm;
 import java.io.IOException;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -26,11 +25,11 @@ public class AsyncResource {
         new Thread() {
             public void run() {
                 try {
-                    String chunkBase = "Sending back a chunk ";
+                    String chunkBase = "Chunk_";
 
                     for (int i = 0; i < 10; i++) {
-                        LOG.debug("writing a chunk {}", i);
-                        output.write(chunkBase + i);
+                        LOG.debug("writing a chunk {}\n", i);
+                        output.write(chunkBase + i + " ");
                         Thread.sleep(500);
                     }
                 } catch (IOException e) {
@@ -58,8 +57,10 @@ public class AsyncResource {
         LOG.debug("triggering chunked sending");
         Client client = ClientBuilder.newClient();
         final Response response = client.target("http://localhost:8091/jaxrs2/rest/async").request().get();
+        LOG.debug("async get done");
         final ChunkedInput<String> chunkedInput = response.readEntity(new GenericType<ChunkedInput<String>>() {
         });
+        chunkedInput.setParser(ChunkedInput.createParser(" "));
         String chunk;
         StringBuilder chunkResult = new StringBuilder();
         while ((chunk = chunkedInput.read()) != null) {

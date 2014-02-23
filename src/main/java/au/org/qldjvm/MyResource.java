@@ -10,7 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 @Path("myresource")
 public class MyResource {
@@ -43,7 +45,7 @@ public class MyResource {
 
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
-    public String putIt() {
+    public String putIt(@Context UriInfo ui) {
         return "Put it!";
     }
 }
